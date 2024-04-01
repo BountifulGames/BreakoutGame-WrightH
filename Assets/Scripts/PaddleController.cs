@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Breakout
+//Name: Hunter Wright
+//Section: SGD.213.2172
+//Instructor: Brian Sowers
+//Date: 4/1/2024
+/////////////////////////////////////////////
 public class PaddleController : MonoBehaviour
 {
-    public float paddleSpeed;
+    private float paddleSpeed;
     private Vector3 playerPos = new Vector3(0, -9.5f, 0);
 
     private void Start()

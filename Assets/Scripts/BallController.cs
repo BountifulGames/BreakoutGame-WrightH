@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Breakout
+//Name: Hunter Wright
+//Section: SGD.213.2172
+//Instructor: Brian Sowers
+//Date: 4/1/2024
+/////////////////////////////////////////////
 public class BallController : MonoBehaviour
 {
-    public float initialVelocity = 600f;
+    private float initialVelocity = 600f;
     private Rigidbody rb;
     private bool ballInPlay;
     void Awake()

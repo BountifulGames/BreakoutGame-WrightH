@@ -4,19 +4,25 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
-
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Breakout
+//Name: Hunter Wright
+//Section: SGD.213.2172
+//Instructor: Brian Sowers
+//Date: 4/1/2024
+/////////////////////////////////////////////
 public class GameManager : MonoBehaviour
 {
-    public int lives = 3;
-    public int bricks;
-    public float resetDelay = 1f;
-    public TMP_Text livesText;
-    public GameObject gameOver;
-    public GameObject youWon;
+    private int lives = 3;
+    private int bricks;
+    private float resetDelay = 1f;
     [SerializeField] private List<GameObject> bricksPrefabs = new List<GameObject>();
-    public GameObject paddle;
+    [SerializeField] private TMP_Text livesText;
+    [SerializeField] private GameObject gameOver;
+    [SerializeField] private GameObject youWon;
+    [SerializeField] private GameObject paddle;
     private GameObject clonePaddle;
-    [SerializeField] private int sceneNum;
+    private int sceneNum;
 
     private static GameManager _instance;
     public static GameManager Instance 
@@ -55,7 +61,14 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.N))
         {
-            LoadNextScene();
+            if (sceneNum < 2)
+            {
+                LoadNextScene();
+            }
+            else
+            {
+                Reset();
+            }
         }
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -90,11 +103,15 @@ public class GameManager : MonoBehaviour
         {
             youWon.SetActive(true);
             Time.timeScale = .25f;
-            if (sceneNum < 3)
+            if (sceneNum < 2)
             {
                 lives++;
+                Invoke("LoadNextScene", resetDelay);
             }
-            Invoke("LoadNextScene", resetDelay);
+            else
+            {
+                Invoke("Reset", resetDelay);
+            }
         }
         if (lives < 1)
         {
@@ -114,7 +131,7 @@ public class GameManager : MonoBehaviour
     private void LoadNextScene()
     {
         sceneNum++;
-        sceneNum = Mathf.Clamp(sceneNum++, 0, 2);
+        sceneNum = Mathf.Clamp(sceneNum, 0, 2);
         SceneManager.LoadScene(sceneNum);
     }
     public void LoseLife()
